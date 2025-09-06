@@ -237,7 +237,49 @@
 												</div>
 												<!--end:Menu item-->
 											</div>
+										<!--begin:Menu item-->
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link {{ request()->is('master/education/index*') ? 'active' : '' }}" href="{{ route('master.education.index') }}">
+													<span class="menu-icon">
+														<i class="ki-duotone ki-update-folder fs-2">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="path4"></span>
+														</i>
+													</span>
+													<span class="menu-title">Pendidikan</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											<!--end:Menu item-->
 										</div>
+										{{-- Student --}}
+										<div class="menu-item pt-3">
+											<!--begin:Menu content-->
+											<div class="menu-content">
+												<span class="menu-heading fw-bold text-uppercase fs-7">Student</span>
+											</div>
+											<!--end:Menu content-->
+										</div>
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link {{ request()->is('student/index*') ? 'active' : '' }}" href="{{ route('student.index') }}">
+												<span class="menu-icon">
+													<i class="ki-duotone ki-update-folder fs-2">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+														<span class="path4"></span>
+													</i>
+												</span>
+												<span class="menu-title">List Student</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
 									</div>
 								</div>
 								<!--end::Scroll wrapper-->

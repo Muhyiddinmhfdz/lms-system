@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Master\EducationController;
 use App\Http\Controllers\Master\RoleController;
 use App\Http\Controllers\Master\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Student\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,6 +43,24 @@ Route::name('master.')->prefix('master')->middleware('auth')->group(function () 
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{role:id}', 'update')->name('update');
     });
+
+    // education
+    Route::name('education.')->controller(EducationController::class)->prefix('education')->group(function () {
+        Route::get('/index', 'index')->name('index');
+        Route::get('/data', 'data')->name('data');
+        Route::post('/insert', 'insert')->name('insert');
+        Route::get('/detail/{education:id}', 'detail')->name('detail');
+        Route::post('/update/{education:id}', 'update')->name('update');
+        Route::post('/changeStatus/{education:id}', 'changeStatus')->name('changeStatus');
+    });
+});
+
+Route::name('student.')->prefix('student')->middleware('auth')->controller(StudentController::class)->group(function () {
+    Route::get('/index', 'index')->name('index');
+    Route::get('/data', 'data')->name('data');
+    Route::get('/show/{user:id}', 'show')->name('show');
+    Route::post('/store', 'store')->name('store');
+    Route::post('/update/{user:id}', 'update')->name('update');
 });
 
 require __DIR__.'/auth.php';

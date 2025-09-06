@@ -19,10 +19,9 @@
         <div class="d-flex flex-center flex-lg-start flex-column">
             <!--begin::Logo-->
             <a href="{{ url('/') }}" class="mb-7">
-                <img alt="Logo" src="{{ asset('assets/media/logos/custom-3.svg') }}" />
+                <img alt="Logo" src="{{ asset('assets/media/lms_system.png') }}" />
             </a>
             <!--end::Logo-->
-            <h2 class="text-white fw-normal m-0">Branding tools designed for your business</h2>
         </div>
     </div>
     <!--end::Aside-->
