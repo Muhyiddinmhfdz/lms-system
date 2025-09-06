@@ -1,17 +1,27 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.main_layout',['title'=>'Dashboard' ,'breadcrum'=>[]])
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+@section('content')
+<div class="row g-5 g-xl-10 mb-2 mb-xl-2">
+    <!--begin::Alert-->
+    <div class="alert alert-primary d-flex align-items-center p-5">
+        <!--begin::Icon-->
+        <i class="ki-duotone ki-notification-bing fs-2hx text-success me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+        <!--end::Icon-->
+        <!--begin::Wrapper-->
+        <div class="d-flex flex-column">
+            <!--begin::Title-->
+            <h4 class="mb-1 text-dark">Selamat Datang {{ Auth::user()->name }}</h4>
+            <!--end::Title-->
         </div>
+        <!--end::Wrapper-->
     </div>
-</x-app-layout>
+    <!--end::Alert-->
+</div>
+<div class="card">
+</div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('assets/js/dashboard/index.js') }}"></script>
+   
+@endsection
