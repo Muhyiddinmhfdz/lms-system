@@ -69,8 +69,8 @@ Route::name('master.')->prefix('master')->middleware('auth')->group(function () 
 Route::name('student.')->prefix('student')->middleware('auth')->controller(StudentController::class)->group(function () {
     Route::get('/index', 'index')->name('index');
     Route::get('/data', 'data')->name('data');
-    Route::get('/show/{user:id}', 'show')->name('show');
-    Route::post('/store', 'store')->name('store');
+    Route::get('/profile/{user:id}', 'profile')->name('profile');
+    Route::get('/get_education/{education:id}', 'get_education')->name('get_education');
     Route::post('/update/{user:id}', 'update')->name('update');
 });
 

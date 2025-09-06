@@ -115,7 +115,14 @@
                         <label class="required fw-semibold fs-6 mb-2">Nama Jurusan</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input type="text" name="name" id="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nama Jurusan" value="" />
+                        <select class="form-select" data-control="select2" name="departemenet_id" id="departemenet_id" data-dropdown-parent="#kt_modal_add_departement" data-placeholder="Pilih Pendidikan" data-allow-clear="true ">
+                            <option></option>
+                            @foreach ($education as $educations)
+                            <option value="{{ $educations->id }}"
+                                {{ ($user->student_detail->education_id ?? '') == $educations->id ? 'selected' : '' }}>
+                                {{ $educations->name }}
+                            @endforeach
+                        </select>
                         <!--end::Input-->
                     </div>
                     <!--end::Input group-->

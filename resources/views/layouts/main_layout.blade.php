@@ -152,8 +152,8 @@
 						<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 							<!--begin::Logo image-->
 							<a href="{{ route('dashboard.index') }}">
-								<img alt="Logo" src="{{ asset('assets/media/SPBU-Pertamina.png') }}" class="h-30px app-sidebar-logo-default" />
-								<img alt="Logo" src="{{ asset('assets/media/SPBU-Pertamina.png') }}" class="h-45px app-sidebar-logo-minimize" />
+								<img alt="Logo" src="{{ asset('assets/media/lms_system.png') }}" class="h-30px app-sidebar-logo-default" />
+								<img alt="Logo" src="{{ asset('assets/media/lms_system.png') }}" class="h-45px app-sidebar-logo-minimize" />
 							</a>
 							<!--end::Logo image-->
 							<!--begin::Sidebar toggle-->
