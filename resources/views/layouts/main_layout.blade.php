@@ -237,7 +237,7 @@
 												</div>
 												<!--end:Menu item-->
 											</div>
-										<!--begin:Menu item-->
+											<!--begin:Menu item-->
 											<div class="menu-item">
 												<!--begin:Menu link-->
 												<a class="menu-link {{ request()->is('master/education/index*') ? 'active' : '' }}" href="{{ route('master.education.index') }}">
@@ -250,6 +250,23 @@
 														</i>
 													</span>
 													<span class="menu-title">Pendidikan</span>
+												</a>
+												<!--end:Menu link-->
+											</div>
+											<!--end:Menu item-->
+											<!--begin:Menu item-->
+											<div class="menu-item">
+												<!--begin:Menu link-->
+												<a class="menu-link {{ request()->is('master/departement/index*') ? 'active' : '' }}" href="{{ route('master.departement.index') }}">
+													<span class="menu-icon">
+														<i class="ki-duotone ki-update-folder fs-2">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+															<span class="path4"></span>
+														</i>
+													</span>
+													<span class="menu-title">Jurusan</span>
 												</a>
 												<!--end:Menu link-->
 											</div>

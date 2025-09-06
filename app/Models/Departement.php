@@ -10,4 +10,9 @@ class Departement extends Model
     //
     use SoftDeletes;
     protected $guarded=['id'];
+
+    public function education()
+    {
+        return $this->belongsTo(Education::class);
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Master\DepartementController;
 use App\Http\Controllers\Master\EducationController;
 use App\Http\Controllers\Master\RoleController;
 use App\Http\Controllers\Master\UserController;
@@ -52,6 +53,16 @@ Route::name('master.')->prefix('master')->middleware('auth')->group(function () 
         Route::get('/detail/{education:id}', 'detail')->name('detail');
         Route::post('/update/{education:id}', 'update')->name('update');
         Route::post('/changeStatus/{education:id}', 'changeStatus')->name('changeStatus');
+    });
+
+    // education
+    Route::name('departement.')->controller(DepartementController::class)->prefix('departement')->group(function () {
+        Route::get('/index', 'index')->name('index');
+        Route::get('/data', 'data')->name('data');
+        Route::post('/insert', 'insert')->name('insert');
+        Route::get('/detail/{departement:id}', 'detail')->name('detail');
+        Route::post('/update/{departement:id}', 'update')->name('update');
+        Route::post('/changeStatus/{departement:id}', 'changeStatus')->name('changeStatus');
     });
 });
 

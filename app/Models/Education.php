@@ -10,4 +10,5 @@ class Education extends Model
     //
     use SoftDeletes;
     protected $guarded=['id'];
+    
 }

@@ -12,7 +12,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class EducationController extends Controller
 {
-    //
     public function index()
     {
         return view('master.education.index');
@@ -37,7 +36,7 @@ class EducationController extends Controller
         }
 
         $filters = [
-            'name'=>'trim',
+            'name'    =>  'trim|escape',
         ];
         // dd($attrclean);
         $sanitizer  = new Sanitizer($request->all(), $filters);
@@ -67,7 +66,7 @@ class EducationController extends Controller
         }
 
         $filters = [
-            'name'=>'trim',
+            'name'    =>  'trim|escape',
         ];
         $sanitizer  = new Sanitizer($request->all(), $filters);
         $attrclean=$sanitizer->sanitize();
