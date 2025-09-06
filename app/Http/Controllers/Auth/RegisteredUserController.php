@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Elegant\Sanitizer\Sanitizer;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -29,22 +31,38 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        $validator = Validator::make($request->all(), [
+            'name'     => 'required|string|max:100',
+            'username' => 'required|string|max:50|unique:users,username',
+            'email'    => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6',
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $filters = [
+            'name'     => 'trim|escape|capitalize',
+            'username' => 'trim|escape|lowercase',
+            'email'    => 'trim|escape|lowercase',
+            'password' => 'trim|escape',
+        ];
+
+        $sanitizer = new Sanitizer($request->all(), $filters);
+        $attrclean = $sanitizer->sanitize();
+
+        $attrclean['password'] = Hash::make($attrclean['password']);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name'     => $attrclean['name'],
+            'username' => $attrclean['username'],
+            'email'    => $attrclean['email'],
+            'password' => $attrclean['password'],
         ]);
 
-        event(new Registered($user));
+        $user->assignRole('Student');
 
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('login')->with('success', 'Registrasi berhasil, silakan login.');
     }
 }

@@ -188,6 +188,56 @@
 											</a>
 											<!--end:Menu link-->
 										</div>
+										<div class="menu-item pt-3">
+											<!--begin:Menu content-->
+											<div class="menu-content">
+												<span class="menu-heading fw-bold text-uppercase fs-7">Master & Setting</span>
+											</div>
+											<!--end:Menu content-->
+										</div>
+										{{-- Master --}}
+										<div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ (request()->is('master/user*') || request()->is('master/role*')) ? 'here show' : '' }}">
+											<!--begin:Menu link-->
+											<span class="menu-link">
+												<span class="menu-icon">
+													<i class="ki-duotone ki-shield-search fs-2">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+													</i>
+												</span>
+												<span class="menu-title">User & Role</span>
+												<span class="menu-arrow"></span>
+											</span>
+											<!--end:Menu link-->
+											<!--begin:Menu sub-->
+											<div class="menu-sub menu-sub-accordion">
+												<!--begin:Menu item-->
+												<div class="menu-item">
+													<!--begin:Menu link-->
+													<a class="menu-link {{ request()->is('master/user*') ? 'active' : '' }}" href="{{ route('master.user.index') }}">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">User</span>
+													</a>
+													<!--end:Menu link-->
+												</div>
+												<!--end:Menu item-->
+												<!--begin:Menu item-->
+												<div class="menu-item">
+													<!--begin:Menu link-->
+													<a class="menu-link {{ request()->is('master/role*') ? 'active' : '' }}" href="{{ route('master.role.index') }}">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+														<span class="menu-title">Role</span>
+													</a>
+													<!--end:Menu link-->
+												</div>
+												<!--end:Menu item-->
+											</div>
+										</div>
 									</div>
 								</div>
 								<!--end::Scroll wrapper-->
