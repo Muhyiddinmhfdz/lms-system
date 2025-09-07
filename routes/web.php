@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Course\CategoryCourseController;
+use App\Http\Controllers\Course\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\DepartementController;
 use App\Http\Controllers\Master\EducationController;
@@ -55,7 +57,7 @@ Route::name('master.')->prefix('master')->middleware('auth')->group(function () 
         Route::post('/changeStatus/{education:id}', 'changeStatus')->name('changeStatus');
     });
 
-    // education
+    // departement
     Route::name('departement.')->controller(DepartementController::class)->prefix('departement')->group(function () {
         Route::get('/index', 'index')->name('index');
         Route::get('/data', 'data')->name('data');
@@ -72,6 +74,28 @@ Route::name('student.')->prefix('student')->middleware('auth')->controller(Stude
     Route::get('/profile/{user:id}', 'profile')->name('profile');
     Route::get('/get_education/{education:id}', 'get_education')->name('get_education');
     Route::post('/update/{user:id}', 'update')->name('update');
+});
+
+Route::name('course.')->prefix('course')->middleware('auth')->group(function () {
+    // education
+    Route::name('category.')->controller(CategoryCourseController::class)->prefix('category')->group(function () {
+        Route::get('/index', 'index')->name('index');
+        Route::get('/data', 'data')->name('data');
+        Route::post('/insert', 'insert')->name('insert');
+        Route::get('/detail/{category:id}', 'detail')->name('detail');
+        Route::post('/update/{category:id}', 'update')->name('update');
+        Route::post('/changeStatus/{category:id}', 'changeStatus')->name('changeStatus');
+    });
+
+    Route::controller(CourseController::class)->group(function () {
+        Route::get('/index', 'index')->name('index');
+        Route::get('/data', 'data')->name('data');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/insert', 'insert')->name('insert');
+        Route::get('/edit/{course:id}', 'edit')->name('edit');
+        Route::post('/update/{course:id}', 'update')->name('update');
+        Route::post('/changeStatus/{course:id}', 'changeStatus')->name('changeStatus');
+    });
 });
 
 require __DIR__.'/auth.php';

@@ -17,4 +17,10 @@ abstract class Controller
         }
         return $errStrFinal;
     }
+
+    
+    protected function remove_comma($val)
+    {
+        return str_replace( ',', '', $val );
+    }
 }

@@ -106,7 +106,7 @@ class StudentController extends Controller
             $user->save();
 
             // profile picture
-            if(isset($request->profile_path)){
+            if ($request->hasFile('profile_path')) {
                 $pathProfile = 'profile_picture' . '/' . date("Y") . '/' . date("m") . '/' . date("d");
                 $fileProfile=$request->profile_path;
                 $filenamehash = Hash::make(pathinfo($fileProfile->getClientOriginalName(), PATHINFO_FILENAME));
