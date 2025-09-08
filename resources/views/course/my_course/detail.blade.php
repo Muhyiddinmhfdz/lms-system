@@ -38,46 +38,11 @@
                 </span>
             </div>
 
-            <!-- Price -->
-            <div class="mb-4">
-                @if($course->discount_price)
-                    <span class="text-danger fw-bold fs-4">
-                        Rp {{ number_format($course->discount_price,0,',','.') }}
-                    </span>
-                    <span class="text-muted text-decoration-line-through">
-                        Rp {{ number_format($course->price,0,',','.') }}
-                    </span>
-                @else
-                    <span class="fw-bold fs-4">
-                        Rp {{ number_format($course->price,0,',','.') }}
-                    </span>
-                @endif
-            </div>
-
             <!-- Description -->
             <p class="text-gray-700">{{ $course->description }}</p>
 
-            <div class="d-flex gap-2 mb-4">
-                <div class="d-flex gap-2 mb-4">
-                    <!-- Tambah ke Keranjang -->
-                    <form action="{{ route('course.cart.store', $course->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-success">
-                            <i class="bi bi-cart-plus"></i> Tambah ke Keranjang
-                        </button>
-                    </form>
-
-                    <!-- Beli Sekarang -->
-                    <form action="{{ route('course.cart.checkout.now', $course->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-credit-card"></i> Beli Sekarang
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <a href="{{ route('course.list.index') }}" class="btn btn-secondary mt-3">
-                <i class="bi bi-arrow-left"></i> Kembali ke Daftar Kursus
+            <a href="{{ route('course.my_course') }}" class="btn btn-secondary mt-3">
+                <i class="bi bi-arrow-left"></i> Kembali ke My Course
             </a>
         </div>
     </div>
@@ -87,7 +52,7 @@
     <div class="mt-5">
         <h4 class="fw-bold mb-3">Materi Kursus</h4>
         <div class="accordion" id="courseDetailAccordion">
-            @foreach($course->details->take(1) as $index => $detail)
+            @foreach($course->details as $index => $detail)
                 <div class="accordion-item mb-2">
                     <h2 class="accordion-header" id="heading{{ $index }}">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="false" aria-controls="collapse{{ $index }}">

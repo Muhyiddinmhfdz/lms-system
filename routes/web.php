@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Course\CartController;
 use App\Http\Controllers\Course\CategoryCourseController;
 use App\Http\Controllers\Course\CourseController;
 use App\Http\Controllers\Course\ListCourseController;
+use App\Http\Controllers\Course\OrderController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\DepartementController;
 use App\Http\Controllers\Master\EducationController;
@@ -96,11 +98,27 @@ Route::name('course.')->prefix('course')->middleware('auth')->group(function () 
         Route::get('/edit/{course:id}', 'edit')->name('edit');
         Route::post('/update/{course:id}', 'update')->name('update');
         Route::post('/changeStatus/{course:id}', 'changeStatus')->name('changeStatus');
+        Route::get('/my_course', 'my_course')->name('my_course');
+        Route::get('/detail_course/{slug}', 'detail_course')->name('detail_course');
     });
 
     Route::name('list.')->controller(ListCourseController::class)->prefix('list')->group(function () {
         Route::get('/index', 'index')->name('index');
         Route::get('/course/{slug}', 'detail')->name('detail');
+        Route::get('/order', 'order')->name('order');
+        Route::get('/data_order', 'data_order')->name('data_order');
+        Route::post('/update_order/{order}', 'update_order')->name('update_order');
+    });
+
+    Route::name('cart.')->controller(CartController::class)->prefix('cart')->group(function () {
+        Route::post('/cart/{course}', 'store')->name('store');
+        Route::get('/cart', 'index')->name('index');
+        Route::post('/checkout/{course}', 'checkout')->name('checkout.now');
+    });
+
+    Route::name('order.')->controller(OrderController::class)->prefix('order')->group(function () {
+        Route::post('store', 'store')->name('store');
+        Route::get('pending/{order}', 'pending')->name('pending');
     });
 });
 

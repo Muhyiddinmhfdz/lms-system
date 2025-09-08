@@ -315,6 +315,40 @@
 											<!--end:Menu link-->
 										</div>
 										<!--end:Menu item-->
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link {{ request()->is('course/list*') ? 'active' : '' }}" href="{{ route('course.list.order') }}">
+												<span class="menu-icon">
+													<i class="ki-duotone ki-book fs-2">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+														<span class="path4"></span>
+													</i>
+												</span>
+												<span class="menu-title">List Order</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link {{ request()->is('course/my_course*') ? 'active' : '' }}" href="{{ route('course.my_course') }}">
+												<span class="menu-icon">
+													<i class="ki-duotone ki-book fs-2">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+														<span class="path4"></span>
+													</i>
+												</span>
+												<span class="menu-title">My Course</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
 										{{-- Student --}}
 										<div class="menu-item pt-3">
 											<!--begin:Menu content-->
@@ -370,6 +404,23 @@
 													</i>
 												</span>
 												<span class="menu-title">Course</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link {{ request()->is('course/list/order*') ? 'active' : '' }}" href="{{ route('course.list.order') }}">
+												<span class="menu-icon">
+													<i class="ki-duotone ki-book fs-2">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+														<span class="path4"></span>
+													</i>
+												</span>
+												<span class="menu-title">List Order</span>
 											</a>
 											<!--end:Menu link-->
 										</div>
@@ -526,6 +577,7 @@
             var hostUrl = "{{ asset('assets') }}";
             var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
             var base_url = document.querySelector('meta[name="base_url"]').content;
+    		const userRole = "{{ Auth::user()->getRoleNames()->first() }}"
         </script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>

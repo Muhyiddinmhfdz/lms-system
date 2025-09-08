@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CourseDetail extends Model
+class Order extends Model
 {
     //
     use SoftDeletes;
     protected $guarded=['id'];
-    public function course()
+
+    public function order_detail()
     {
-        return $this->belongsTo(Course::class);
+        return $this->hasMany(OrderDetail::class);
     }
 }

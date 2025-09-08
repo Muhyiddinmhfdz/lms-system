@@ -1,12 +1,12 @@
-@extends('layouts.main_layout',['title'=>'Course','breadcrum'=>['Course - List']])
+@extends('layouts.main_layout',['title'=>'My Course','breadcrum'=>['My Course - List']])
 
 @section('content')
 <div class="container">
 
     <!-- Filter -->
-    <form method="GET" action="{{ route('course.list.index') }}" class="row mb-4 g-3">
+    <form method="GET" action="{{ route('course.my_course') }}" class="row mb-4 g-3">
         <!-- Category -->
-        <div class="col-md-3">
+        <div class="">
             <select name="category" class="form-select">
                 <option value="">-- Semua Kategori --</option>
                 @foreach($categories as $cat)
@@ -18,36 +18,10 @@
             </select>
         </div>
 
-        <!-- Level -->
-        <div class="col-md-3">
-            <select name="level" class="form-select">
-                <option value="">-- Semua Level --</option>
-                @foreach($levels as $key => $label)
-                    <option value="{{ $key }}" 
-                        {{ request('level') == $key ? 'selected' : '' }}>
-                        {{ $label }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <!-- Price -->
-        <div class="col-md-3">
-            <select name="price" class="form-select">
-                <option value="">-- Semua Harga --</option>
-                <option value="low" {{ request('price') == 'low' ? 'selected' : '' }}>
-                    Rp ≤ 100.000
-                </option>
-                <option value="high" {{ request('price') == 'high' ? 'selected' : '' }}>
-                    Rp > 100.000
-                </option>
-            </select>
-        </div>
-
         <!-- Buttons -->
         <div class="col-md-3 d-flex gap-2">
             <button type="submit" class="btn btn-primary w-100">Filter</button>
-            <a href="{{ route('course.list.index') }}" class="btn btn-secondary w-100">Reset</a>
+            <a href="{{ route('course.my_course') }}" class="btn btn-secondary w-100">Reset</a>
         </div>
     </form>
 
@@ -99,7 +73,7 @@
                     </p>
 
                     <!-- Button -->
-                    <a href="{{ route('course.list.detail', $item->slug) }}" class="btn btn-sm btn-primary w-100 mt-auto">Lihat Detail</a>
+                    <a href="{{ route('course.detail_course', $item->slug) }}" class="btn btn-sm btn-primary w-100 mt-auto">Lihat Detail</a>
                 </div>
 
                 <!-- Course Details List -->
@@ -107,7 +81,7 @@
                 <div class="card-footer bg-light">
                     <h6 class="fw-bold mb-2">Materi Kursus:</h6>
                     <ul class="list-unstyled text-start small">
-                        @foreach($item->details->take(1) as $detail)
+                        @foreach($item->details as $detail)
                             <li><i class="bi bi-play-circle text-success"></i> {{ $detail->sub_title }}</li>
                         @endforeach
                     </ul>

@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Course;
 use App\Http\Controllers\Controller;
 use App\Models\CategoryCourse;
 use App\Models\Course;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class ListCourseController extends Controller
 {
@@ -62,5 +65,36 @@ class ListCourseController extends Controller
             ->firstOrFail();
 
         return view('course.student.detail', compact('course'));
+    }
+
+    public function order()
+    {
+        return view('course.order.list');
+    }
+
+    public function data_order(Request $request)
+    {
+        $course = Order::query();
+
+        // Jika bukan superadmin → filter by user_id
+        if (!Auth::user()->hasRole('Super Admin')) {
+            $course->where('user_id', Auth::user()->id);
+        }
+
+        // Filter berdasarkan order_code kalau ada input name
+        if (!is_null($request->name)) {
+            $course->where('order_code', 'like', '%' . $request->name . '%');
+        }
+
+        return DataTables::of($course)->make(true);
+    }
+    
+    public function update_order(Order $order)
+    {
+        $order->status = true;
+        $order->save();
+
+        return response()->json(['status'=>true,'data'=>$order], 200);
+
     }
 }

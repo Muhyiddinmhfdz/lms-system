@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CategoryCourse;
 use App\Models\Course;
 use App\Models\CourseDetail;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Elegant\Sanitizer\Sanitizer;
 use Illuminate\Support\Facades\Validator;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -214,5 +216,65 @@ class CourseController extends Controller
         $course->save();
 
         return response()->json(['status' => true, 'data' => $course], 200);
+    }
+
+    public function my_course(Request $request)
+    {
+        $order_detail = OrderDetail::with('order')
+            ->whereHas('order', function ($q) {
+                $q->where('user_id', Auth::id());
+            })
+            ->get();
+
+        $query = Course::with(['category', 'details'])
+            ->whereIn('id', $order_detail->pluck('course_id'));
+
+        // Filter by Category
+        if ($request->filled('category')) {
+            $query->where('category_course_id', $request->category);
+        }
+
+        // Filter by Level
+        if ($request->filled('level')) {
+            $query->where('level_id', $request->level);
+        }
+
+        // Filter by Harga (contoh: max100000)
+        if ($request->filled('price')) {
+            if ($request->price == 'low') {
+                $query->where('discount_price', '<=', 100000)
+                    ->orWhere(function ($q) {
+                        $q->whereNull('discount_price')
+                            ->where('price', '<=', 100000);
+                    });
+            } elseif ($request->price == 'high') {
+                $query->where('discount_price', '>', 100000)
+                    ->orWhere(function ($q) {
+                        $q->whereNull('discount_price')
+                            ->where('price', '>', 100000);
+                    });
+            }
+        }
+
+        // Pagination
+        $courses = $query->paginate(6)->appends($request->all());
+
+        // Data tambahan untuk filter dropdown
+        $categories = CategoryCourse::all();
+        $levels = [
+            1 => 'Beginner',
+            2 => 'Intermediate',
+            3 => 'Advanced',
+        ];
+        return view('course.my_course.index',compact('courses','categories','levels'));
+    }
+
+    public function detail_course($slug)
+    {
+        $course = Course::with(['details', 'category'])
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        return view('course.my_course.detail', compact('course'));
     }
 }
