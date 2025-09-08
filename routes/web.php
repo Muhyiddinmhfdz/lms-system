@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Course\CategoryCourseController;
 use App\Http\Controllers\Course\CourseController;
+use App\Http\Controllers\Course\ListCourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\DepartementController;
 use App\Http\Controllers\Master\EducationController;
@@ -95,6 +96,11 @@ Route::name('course.')->prefix('course')->middleware('auth')->group(function () 
         Route::get('/edit/{course:id}', 'edit')->name('edit');
         Route::post('/update/{course:id}', 'update')->name('update');
         Route::post('/changeStatus/{course:id}', 'changeStatus')->name('changeStatus');
+    });
+
+    Route::name('list.')->controller(ListCourseController::class)->prefix('list')->group(function () {
+        Route::get('/index', 'index')->name('index');
+        Route::get('/course/{slug}', 'detail')->name('detail');
     });
 });
 

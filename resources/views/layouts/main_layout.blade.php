@@ -328,7 +328,7 @@
 											<!--begin:Menu link-->
 											<a class="menu-link {{ request()->is('student/index*') ? 'active' : '' }}" href="{{ route('student.index') }}">
 												<span class="menu-icon">
-													<i class="ki-duotone ki-update-folder fs-2">
+													<i class="ki-duotone ki-profile-user fs-2">
 														<span class="path1"></span>
 														<span class="path2"></span>
 														<span class="path3"></span>
@@ -343,9 +343,9 @@
 										<!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link {{ request()->is('student/profil/e*') ? 'active' : '' }}" href="{{ route('student.profile', Auth::user()->id) }}">
+											<a class="menu-link {{ request()->is('student/profil*') ? 'active' : '' }}" href="{{ route('student.profile', Auth::user()->id) }}">
 												<span class="menu-icon">
-													<i class="ki-duotone ki-update-folder fs-2">
+													<i class="ki-duotone ki-profile-circle fs-2">
 														<span class="path1"></span>
 														<span class="path2"></span>
 														<span class="path3"></span>
@@ -353,6 +353,23 @@
 													</i>
 												</span>
 												<span class="menu-title">Profile</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link {{ request()->is('course/list*') ? 'active' : '' }}" href="{{ route('course.list.index') }}">
+												<span class="menu-icon">
+													<i class="ki-duotone ki-book fs-2">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+														<span class="path4"></span>
+													</i>
+												</span>
+												<span class="menu-title">Course</span>
 											</a>
 											<!--end:Menu link-->
 										</div>
